@@ -1,12 +1,19 @@
+# exposes your application within the cluster
+# defines a logical set of pods and defines a policy for acessing them
+
 apiVersion: v1
 kind: Service
 metadata:
   name: myapp-service
 spec:
+  # gives the Service a name
   selector:
     app: myapp
+  # defines the ports to expose on the Service and where to forward the traffic
+  # here, it exposes port 80 on the Service and forwards traffic to port 3000 on the pods
   ports:
     - protocol: TCP
       port: 80
       targetPort: 3000
+  # specifies the type of Service as NodePort
   type: NodePort
