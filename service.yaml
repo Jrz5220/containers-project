@@ -17,3 +17,26 @@ spec:
       targetPort: 3000
   # specifies the type of Service as NodePort
   type: NodePort
+
+
+# command to apply this configuration to your Kubernetes cluster:
+# kubectl apply -f service.yaml
+
+# view all the services present:
+# kubectl get services
+
+# OUTPUT
+# TYPE: NodePort
+# specifies htath this service is of type NodePort, meaning it exposes the service on a port on all nodes in the cluster
+
+# CLUSTER-IP: 172.21.26.244
+# the internal Cluster IP address assigned to the service. It is used for communication within the Kubernetes cluster.
+
+# EXTERNAL-IP: <none>
+# indicates that there is no external IP address assigned to this service. External clients cannot directly access this service from outside the Kubernetes cluster.
+
+# PORT(S): 80:30016/TCP
+# indicates that port 80 is exposed internally by the service, and externally it is accessible on port 30016 using the TCP protocol. The format is external/protocol
+
+# AGE: 25s
+# shows the service has been running for 25 seconds since its creation
