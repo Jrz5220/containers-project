@@ -1,23 +1,36 @@
+# A PersistentVolume (PV) is a storage resource in the cluster that exists independently of any Pod that might use it.
+# It is a cluster-wide resource that is provisioned by an administrator
+
 apiVersion: v1
 kind: PersistentVolume
 metadata:
+  # specifies the name of the PV, which is myapp-volume in this case
   name: myapp-volume
+# defines specifications of the PV
 spec:
   capacity:
     storage: 1Gi
+  # specifies that the volume can be mounted as read-write by a single node
   accessModes:
     - ReadWriteOnce
   hostPath:
+    # indicates that the PV is backed by a directory on the host (/data in this case)
     path: /data
 
+
+# A PerisistentVolumeClaim (PVC) is a request for storage resources by a user or Pod.
+# They can only request storage within their namespace.
+# --- separates the definition of the PV from the definition of the PVC
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
+  # specifies the name of the PVC
   name: myapp-pvc
 spec:
   accessModes:
     - ReadWriteOnce
+  # specifies the resource requirements for the PVC
   resources:
     requests:
       storage: 1Gi
