@@ -1,31 +1,43 @@
+# specifies the version of the Kubernetes API being used and the resource type (Deployment)
 apiVersion: apps/v1
+# indicates that this YAML defines a Deployment object
 kind: Deployment
+# defines the desired state for the Deployment, including the number of replicas, update strategy, and pod template
 metadata:
   name: myapp
   labels:
     app: myapp
+# defines the desired state for the Deployment, including the number of replicas, update strategy, and pod template
 spec:
+  # specifies that there should be one replica of the application running
   replicas: 1
+  # defines how the Deployment finds which Pods to manage, using labels
   selector:
     matchLabels:
       app: myapp
+  # specifies the update strategy for the Deployment, here using rolling updates with certain constraints
   strategy:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
     type: RollingUpdate
+  # describes the Pod template used for creating new Pods
   template:
     metadata:
       labels:
         app: myapp
     spec:
+      # lists the containers within the Pod
       containers:
-      - image: us.icr.io/<your SN labs namespace>/myapp:v1
+      - image: us.icr.io/sn-labs-felixlazo94/myapp:v1
         imagePullPolicy: Always
+        # assigns a name to the container
         name: myapp
+        # specifies which ports should be exposed by the container
         ports:
         - containerPort: 3000
           name: http
+        # defines resource requests and limits for the container, such as CPU
         resources:
           limits:
             cpu: 50m
